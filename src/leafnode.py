@@ -1,5 +1,6 @@
 from htmlnode import HTMLNode
 from functools import reduce
+from utils import props_to_str
 
 
 class LeafNode(HTMLNode):
@@ -8,11 +9,11 @@ class LeafNode(HTMLNode):
 
     def to_html(self):
         if self.value is None:
-            raise ValueError("A LeafNode created with no value. All leaf nodes must have a value.")
+            raise ValueError(
+                "A LeafNode created with no value. All leaf nodes must have a value."
+            )
 
         if self.tag is None:
             return str(value)
-        
-        props_str = reduce(lambda acc, prop: acc + " " + f'{prop[0]}={prop[1]}', self.props.items(), "")
-        return f"<{self.tag}{props_str}>{self.value}</{self.tag}>"
 
+        return f"<{self.tag}{props_to_str(self.props)}>{self.value}</{self.tag}>"
