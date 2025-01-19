@@ -4,7 +4,7 @@ from utils import props_to_str
 
 
 class LeafNode(HTMLNode):
-    def __init__(self, tag: str, value: str, props: dict):
+    def __init__(self, tag: str, value: str, props: dict = None):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
