@@ -3,7 +3,7 @@ import unittest
 
 
 class TestHTMLNode(unittest.TestCase):
-    def test_expected_fields(self):
+    def test_expected_values(self):
         test_node = HTMLNode(
             "<b>",
             "this is a test (in bold)",
