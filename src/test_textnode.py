@@ -1,6 +1,7 @@
 import unittest
 
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
+from leafnode import LeafNode
 
 
 class TestTextNode(unittest.TestCase):
@@ -27,6 +28,21 @@ class TestTextNode(unittest.TestCase):
         self.assertIn("steam", node.text)
         self.assertEqual(TextType.NORMAL, node.text_type)
         self.assertIn("url", node.url)
+
+    def test_text_node_to_html_node(self):
+        normal_node = TextNode("Brave New Text Node", TextType.NORMAL)
+        bold_node = TextNode("A very bold one at that", TextType.BOLD)
+        italic_node = TextNode("And somewhat Italian", TextType.ITALIC)
+        code_node = TextNode("tap tap tap", TextType.CODE)
+        link_node = TextNode("Linkity clink", TextType.LINK, "https://clickity-click")
+        image_node = TextNode(
+            "This image describes a beautiful prairie with black and white rabbits hopping lively all around it",
+            TextType.IMAGE,
+            url="https://definitely-not-a-rickroll",
+        )
+
+        normal_html_node = text_node_to_html_node(normal_node)
+        self.assertEqual(normal_node.text, normal_html_node.value)
 
 
 if __name__ == "__main__":
