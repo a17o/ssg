@@ -44,6 +44,29 @@ class TestTextNode(unittest.TestCase):
         normal_html_node = text_node_to_html_node(normal_node)
         self.assertEqual(normal_node.text, normal_html_node.value)
 
+        bold_html_node = text_node_to_html_node(bold_node)
+        self.assertEqual(bold_node.text, bold_html_node.value)
+        self.assertEqual("b", bold_html_node.tag)
+
+        italic_html_node = text_node_to_html_node(italic_node)
+        self.assertEqual(italic_node.text, italic_html_node.value)
+        self.assertEqual("i", italic_html_node.tag)
+
+        code_html_node = text_node_to_html_node(code_node)
+        self.assertEqual(code_node.text, code_html_node.value)
+        self.assertEqual("code", code_html_node.tag)
+
+        link_html_node = text_node_to_html_node(link_node)
+        self.assertEqual(link_node.text, link_html_node.value)
+        self.assertEqual("a", link_html_node.tag)
+        self.assertEqual(link_html_node.props["href"], link_node.url)
+
+        image_html_node = text_node_to_html_node(image_node)
+        self.assertEqual("", image_html_node.value)
+        self.assertEqual("img", image_html_node.tag)
+        self.assertEqual(image_html_node.props["src"], image_node.url)
+        self.assertEqual(image_html_node.props["alt"], image_node.text)
+
 
 if __name__ == "__main__":
     unittest.main()
